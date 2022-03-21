@@ -39,6 +39,6 @@
     </form>
   </div>
         <!-- end of login componet -->
-        <?php  include("heder/footer.php");?>
+        <!-- <?php  include("heder/footer.php");?> -->
 </body>
 </html>

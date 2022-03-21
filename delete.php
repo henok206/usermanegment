@@ -1,6 +1,6 @@
 <?php
  session_start();
- //include("heder/heder.php");
+ include("heder/heder.php");
  if(!isset($_SESSION['username'])){
     header("location:index.php");
 }
