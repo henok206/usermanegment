@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include("heder/heder.php");
+include("template/heder.php");
 include("database.php");
 
 echo "login";
