@@ -1,15 +1,15 @@
 <?php
  session_start();
- include("heder/heder.php");
+ //include("template/heder.php");
  if(!isset($_SESSION['username'])){
     header("location:index.php");
 }
     include("database.php");
     $userId=$_GET['id'];
-    echo"user id:$userId";
+    echo"userid:$userId";
     // $sql="DELETE FROM `user_tbl` WHERE 'id' = ?";
     // $stmt=$conn->prepare($sql);
-    // $stmt->execute([$userId]);
+    // $stmt->execute(['$userId']);
     $message="";
 
     $sql = "DELETE FROM user_tbl WHERE id = :userId";
@@ -19,12 +19,15 @@
         
     if($stmt->rowCount()==1){
       
-        $message ="The user has been deleted";
+        $message ="<h3>The user has been deleted</h3>";
+        $opeStatus=0;
         
     }
     else{
-           $message ="error try again, there is something wrong";
+           $message ="Error try again";
+           $opeStatus=1;
     }
     $_SESSION['message']=$message;
+    $_SESSION['opeStatus']=$opeStatus;
     header("location:home.php");
 ?>
