@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("heder/heder.php");
+include("template/heder.php");
 
 if(!isset($_SESSION['username'])){
     header("location:index.php");
@@ -12,14 +12,28 @@ if(!isset($_SESSION['username'])){
 ?>
 <?php
      
-     if(isset($_SESSION['message'])){
-        echo " <div class='alert alert-success' role='alert'>";
-        echo $_SESSION['message'];
-        echo "</div>";
-        
+     if(isset($_SESSION['message']))
+    {
+         if($_SESSION['opeStatus']==0){
+            echo " <div class='alert alert-success' role='alert'>";
+            echo $_SESSION['message'];
+            echo "</div>";
         }
-        if(isset($_SESSION['message']))
-        unset($_SESSION['message']);
+         else{
+            echo " <div class='alert alert-danger' role='alert'>";
+            echo $_SESSION['message'];
+            echo "</div>";
+        }
+       
+        
+    }
+          if(isset($_SESSION['message']))
+        {
+            unset($_SESSION['message']);
+            unset($_SESSION['opeStatus']);
+            
+
+        }
         
     
 ?>
@@ -40,7 +54,7 @@ if(!isset($_SESSION['username'])){
             <?php
             
              $count=1;
-             $sql= "SELECT * FROM `user_tbl` WHERE 1";
+             $sql= "SELECT * FROM `user_tbl` WHERE 1"; 
              $stmt=$conn->prepare($sql);
              $stmt->execute();
              //echo $stmt->rowCount();
@@ -65,8 +79,8 @@ if(!isset($_SESSION['username'])){
                      echo "<td><span class='badge bg-danger'>In Active</span> </td>";
                  }
                  echo "<td>";
-                      echo "<button type='button' class='btn btn-warning'>update</button>";
-                      echo "<button type='button' class='btn btn-info'>view</button>";
+                      echo " <a href='update.php?id=$id'><button type='button' class='btn btn-warning'>update</button></a>";
+                      echo " <a href='display.php?id=$id'><button type='button' class='btn btn-info'>view</button></a>";
                       echo "<a href='delete.php?id=$id'><button type='button' class='btn btn-danger'>Delete</button></a>";
                   
                  echo "</td>";
@@ -76,7 +90,7 @@ if(!isset($_SESSION['username'])){
 
             ?>
           
-            
+           
            
         </tbody>
         </table>
